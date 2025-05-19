@@ -1,0 +1,13 @@
+{
+    "team": "Team:",
+    "sport": "Sport:",
+    "year": "Year:",
+    "head-coach": "Head coach:",
+    "filter": "Filter Teammates:",
+    "all": "All Players",
+    "nickname": "Nicknames",
+    "forward": "Position Forward",
+    "midfielder": "Position Midfielder",
+    "defender": "Position Defender",
+    "goalkeeper": "Position Goalkeeper"
+}
