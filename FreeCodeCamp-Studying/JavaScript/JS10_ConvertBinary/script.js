@@ -6,16 +6,24 @@ const animationData = [
     //objeto que representa o primeiro quadro da animaçao 
     {
         inputVal: 5,
-        addElDelay: 1000 
+        addElDelay: 1000,
+        msg: "decimalToBinary(5) returns '10' + 1 (5 % 2). Then it pops off the stack.",
+        showMsgDelay: 15000,
+        removeElDelay: 20000,
     },
     {
         inputVal: 2,
-        addElDelay: 1500
+        addElDelay: 1500,
+        msg: "decimalToBinary(2) returns '1' + 0 (2 % 2) and gives that value to the stack below. Then it pops off the stack.",
+        showMsgDelay: 10000,
+        removeElDelay: 15000,
     },
     {
         inputVal: 1,
         addElDelay: 2000,
-        msg: ""
+        msg: "decimalToBinary(1) returns '1' (base case) and gives that value to the stack below. Then it pops off the stack.",
+        showMsgDelay: 5000,
+        removeElDelay: 10000
     },
 ];
 
@@ -42,6 +50,7 @@ const showAnimation = () => {
 
     animationData.forEach((obj) => {
         //tempo armazendado para cada quadro de animação armazenado em addElDelay, usar setTimeout para configurar o atraso para adicionar elementos ao DOM
+        //add p ao DOM
         setTimeout(() => {
             animationContainer.innerHTML += `
             <p id="${obj.inputVal}" class="animation-frame">
@@ -49,7 +58,19 @@ const showAnimation = () => {
             </p>
             `;
         }, obj.addElDelay);
+        //atualiza o texto de cada p
+        setTimeout(() => {
+            document.getElementById(obj.inputVal).textContent = obj.msg;
+        }, obj.showMsgDelay);
+        //remove os p do DOM
+        setTimeout(() => {
+            document.getElementById(obj.inputVal).remove();
+        }, obj.removeElDelay);
     });
+
+    setTimeout(() => {
+        result.textContent = decimalToBinary(5);
+    }, 20000);
 };
 
 //function para verificar o valor no elemento de entrada numerica o input sempre que o usuario clicar no botão converter
@@ -87,5 +108,4 @@ numberInput.addEventListener("keydown", (e) => {
     if(e.key === "Enter"){
         checkUserInput();
     }
-
 }); 
