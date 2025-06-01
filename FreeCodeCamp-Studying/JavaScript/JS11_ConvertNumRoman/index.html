@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="script.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <main class="
+        w-full 
+        h-full 
+        flex 
+        flex-col 
+        items-center 
+        justify-center 
+        align-center 
+        text-[20px]">
+        <div class="mt-10 w-[500px]">
+            <div class="flex flex-col bg-zinc-800 items-center p-5 text-white">
+                <h1 class="
+                    text-center 
+                    pb-3 
+                    mb-3 
+                    border-b-1 
+                    w-full">
+                    Roman Numeral <br>Converter
+                </h1>
+            
+                <section class="flex flex-col gap-3">
+                    <label for="number-input" class="
+                        text-center">
+                        Enter a number:
+                    </label>
+                    <input type="number" class="
+                        number 
+                        p-2 
+                        bg-zinc-100 
+                        text-black" id="number"/>
+                    <button class="
+                        convert-btn 
+                        bg-zinc-950 
+                        p-2" id="convert-btn">
+                        Convert
+                    </button>
+                </section>
+            
+            </div>
+    
+            <div class="mt-5">
+                <p id="erro" class="
+                    p-2 
+                    text-white 
+                    text-center 
+                    bg-red-800 
+                    border-2 
+                    border-red-500"></p>
+                <p id="output" class="
+                    p-2 
+                    text-white 
+                    text-center 
+                    bg-zinc-800 
+                    border-2 
+                    border-zinc-500"></p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
