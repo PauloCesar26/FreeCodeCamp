@@ -11,7 +11,8 @@ const sortInputArray = (event) => {
         //funtion return implicit
     //function Number() convert strings for number, return array of number now
     const inputValues = [...document.getElementsByClassName("values-dropdown")].map(dropdown =>  Number(dropdown.value));
-    updateUI(inputValues);
+    const sortedValues = selectionSort(inputValues);
+    updateUI(sortedValues);
 };
 //function to update display with the sorted numbers 
     //that takes a single array parameter
@@ -30,9 +31,27 @@ const bubbleSort = (array) => {
         //iterate all values except the last one
         for(let j = 0; j < array.length - 1; j++){
             console.log(array, array[j], array[j + 1]);
+            //check if the current element is large than the next element
+                //when if condition is true, need to swap two elements, the large element up toward the end of the array
+            if(array[j] > array[j+1]){
+                const temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
         }
     }
+    return array;
 };
+
+//selection sort
+    //works by finding the smallest value in the array, then swapping it with the first value in the array 
+    //then it finds the next smallest value in the array and swaps it with the second value in the array 
+    //it continues iteratingthrough the array until it is completely sorted 
+const selectionSort = (array) => {
+    for(let i = 0; i < array.length; i++){
+
+    }
+}
 
 sortButton.addEventListener("click", sortInputArray);
 
