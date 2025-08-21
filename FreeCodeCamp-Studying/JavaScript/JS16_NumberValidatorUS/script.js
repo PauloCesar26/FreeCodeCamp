@@ -4,27 +4,38 @@ const checkBtn = document.getElementById("check-btn");
 const clearBtn = document.getElementById("clear-btn");
 
 const checkInput = (input) => {
-    //Regex
-        //^ used in the start of string <- indicate that is in the start of string
-    const codeCountry = "^(1\\s?)?";
-    const codeArea = "";
-    
-    if(!userInput.value){
+    if(!input){
         alert("Please provide a phone number");
         return;
     }
     
-    if(userInput.value === "1555-555-5555" || userInput.value === "1 555-555-5555"){
-        userInput.value = "";
-        displayResult.textContent = "Valid US number: 1 555-555-5555";
-    }
+    //Regex
+        //^ used in the start of string <- indicate that is in the start of string
+        //\\s? means optional a space
+    const codeCountry = "^(1\\s?)?";
+    const codeArea = "(\\([0-9]{3}\\)|[0-9]{3})";
+    const spaceDashes = "[\\s\\-]?";
+    const phoneNumber = "[0-9]{3}[\\s\\-]?[0-9]{4}$";
+    const phoneNumberComplete = new RegExp(
+        `${codeCountry}${codeArea}${spaceDashes}${phoneNumber}`
+    );
+
+    const elementP = document.createElement("p");
+    elementP.className = "results-text";
     
+    console.log(phoneNumberComplete);
+    console.log(phoneNumberComplete.test(input));
     
-    
-    console.log("teste")
+    phoneNumberComplete.test(input) ? (elementP.style.color = "#00471b") : (elementP.style.color = "#4d3800");
+    const textElementP = document.createTextNode(`${phoneNumberComplete.test(input) ? "Valid" : "Invalid"} US number: ${input}`);
+
+    elementP.appendChild(textElementP);
+    displayResult.appendChild(elementP);   
 }
 
 checkBtn.addEventListener("click", () => {
+    checkInput(userInput.value);
+    userInput.value = "";
 });
 clearBtn.addEventListener("click", () => {
     displayResult.innerHTML = "";
