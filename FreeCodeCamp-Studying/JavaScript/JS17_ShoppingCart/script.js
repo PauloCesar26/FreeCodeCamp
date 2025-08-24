@@ -87,5 +87,40 @@ const products = [
     }
 ]; 
 
-console.log(products);
+//destructure properties
+products.forEach(({name, id, price, category}) => {
+    dessertCards.innerHTML += `
+        <div class="dessert-card">
+            <h2>${name}</h2>
+            <p class="dessert-price">$${price}</p>
+            <p class="product-category">Category: ${category}</p>
+            <button id=${id} class="btn add-to-cart-btn">Add to cart</button>
+        </div>
+    `;
+});
 
+//OOP: 
+    //"class" is like a blueprint for creating objects
+        //It allows you to define a set of properties and methods, and instantiate 
+        // (or create) new objects with those properties and methods
+
+    //class have a special "constructor" method, which is called when a new 
+    //instance of the class is created
+        //the constructor method is great place to initialize properties of the class
+
+    //The "this" keyword is JS is used to refer to the current object
+        //depending on where this is used, what it references changes
+        //in the case of a class, it refers to the instacne of the object being constructed
+        //can use the this keyword to set the properties of the object being instantiated
+        //can say that "this" is a reference of current object
+class ShoppingCart {
+    constructor() {
+        this.items = [];
+        this.total = 0;
+        this.taxRate = 8.25;
+    }
+
+    addItem(id, products){
+        
+    }
+};
