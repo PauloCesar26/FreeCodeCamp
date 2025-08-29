@@ -99,20 +99,6 @@ products.forEach(({name, id, price, category}) => {
     `;
 });
 
-//OOP: 
-    //"class" is like a blueprint for creating objects
-        //It allows you to define a set of properties and methods, and instantiate 
-        // (or create) new objects with those properties and methods
-
-    //class have a special "constructor" method, which is called when a new 
-    //instance of the class is created
-        //the constructor method is great place to initialize properties of the class
-
-    //The "this" keyword is JS is used to refer to the current object
-        //depending on where this is used, what it references changes
-        //in the case of a class, it refers to the instacne of the object being constructed
-        //can use the this keyword to set the properties of the object being instantiated
-        //can say that "this" is a reference of current object
 class ShoppingCart {
     constructor() {
         this.items = [];
@@ -120,7 +106,23 @@ class ShoppingCart {
         this.taxRate = 8.25;
     }
 
+    //method to add item
+        //first argument "id", is the id of the product the user has added to their cart
+        //second argument "products", is an array of product objects
+            //by using a parameter instead of directly referencing your existing "products" array
     addItem(id, products){
-        
+        //to find the product that the user is adding to the cart
+        const product = products.find((item) => {
+            return item.id === id;
+        });
+        //destructuring to extract name and price from product
+        const {name, price} = product;
+        //add the product into the cart's
+        this.items.push(product);
+
+        const totalCountPerProduct = {};
+        this.items.forEach((dessert) => {
+
+        });
     }
 };
