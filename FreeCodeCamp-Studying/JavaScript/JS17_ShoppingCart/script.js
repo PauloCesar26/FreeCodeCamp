@@ -122,7 +122,88 @@ class ShoppingCart {
 
         const totalCountPerProduct = {};
         this.items.forEach((dessert) => {
-
+            totalCountPerProduct[dessert.id] = (totalCountPerProduct[dessert.id] || 0) + 1;
         });
+
+        const currentProductCount = totalCountPerProduct[product.id];
+        //if a product has already been added to the user's cart, matching element which you'II need
+        const currentProductCountSpan = document.getElementById(`product-count-for-id${product.id}`);
+        //checks if the current product is already in the cart
+        currentProductCount > 1 ? 
+            currentProductCountSpan.textContent = `${currentProductCount}x` 
+            : 
+            productsContainer.innerHTML += 
+            `<div class="product" id="dessert${id}">
+                <p><span class="product-count" id="product-count-for-id${id}"></span>${name}</p>
+                <p>${price}</p>
+            </div>`;
+    }
+
+    getCounts(){
+        return this.items.length;
+    }
+
+    calculateTotal(){
+        const subTotal = this.items.reduce((total, item) => total + item.price, 0);
+        const tax = this.calculateTaxes(subTotal);
+        this.total = subTotal + tax;
+
+        cartSubTotal.textContent = `$${subTotal.toFixed(2)}`;
+        cartTaxes.textContent = `$${tax.toFixed(2)}`;
+        cartTotal.textContent = `$${this.total.toFixed(2)}`;
+
+        return this.total;
+    }
+
+    calculateTaxes(amount){
+        //.toFixed() method used to format a number by converting it into a string and rounding it to a specified number of decimal places
+            //the issue with .toFixed() returnning a string is that you want to be able to perfom calculations with the tax rate
+            //To fix this, use parseFloat() function, this will convert the fixed string back into a number
+        return parseFloat(((this.taxRate / 100) * amount).toFixed(2));
+    }
+
+    clearCart(){
+        if(!this.items.length){
+            alert("Your shopping cart is already empty");
+            return;
+        }
+
+        //Browse have a built-in confirm() function which displays a confirmation prompt to the user.
+            //it accepts a string, whicl is the message displayed to the user
+            //it return true if the user confirms and false if the user calcels
+        let isCartCleared = confirm("Are you sure you want to clear all items from your shopping cart?");
+
+        if(isCartCleared){
+            this.items = [];
+            this.total = 0;
+            productsContainer.innerHTML = "";
+            totalNumberOfItems.textContent = 0;
+            cartSubTotal.textContent = 0;
+            cartTaxes.textContent = 0;
+            cartTotal.textContent = 0;
+        }
     }
 };
+//instantiate a new ShoppingCart object 
+ //new keyword used when instantiating the object
+const cart = new ShoppingCart();
+
+const addToCartBtns = document.getElementsByClassName("add-to-cart-btn");
+
+[...addToCartBtns].forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+        //call .addItem method of cart object 
+        cart.addItem(Number(event.target.id), products);
+        totalNumberOfItems.textContent = cart.getCounts();
+        cart.calculateTotal();
+    });
+});
+
+cartBtn.addEventListener("click", () => {
+    isCartShowing = !isCartShowing;
+
+    showHideCartSpan.textContent = isCartShowing ? "Hide" : "Show";
+    cartContainer.style.display = isCartShowing ? "block" : "none";
+});
+
+clearCartBtn.addEventListener("click", cart.clearCart.bind(cart));
