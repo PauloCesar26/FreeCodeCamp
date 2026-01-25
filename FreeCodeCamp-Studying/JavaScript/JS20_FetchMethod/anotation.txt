@@ -1,0 +1,16 @@
+- API = Application Programming Interface
+- API lets people from outside of an organization retrieve it's internal data
+
+- Method called "fetch" that allows code to receive data from an API by sending a GET request
+    - The fetch return a "Promise", which is a placeholder object that will either be fulfilled 
+    if your request is successfull, ou rejected if youer request is unsuccessful
+
+    - If the promise is fulfilled, it resolves to a "Response" object, and you can use the ".then()"
+    method to access the "Response"
+
+    - The data you get from a "GET" request is not usable at first, to make usable, can use the 
+    ".json()" method on the "Response" object to parse it into JSON
+
+    - The ".catch()" method is another asynchronous JS method you cna use to handle error.
+    This is useful in case the "Promise" gets rejected
+
